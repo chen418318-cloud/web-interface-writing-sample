@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reset the controls. Restore the results.</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17302c; background: #f5f4ee; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1060px; margin: 0 auto; padding: 44px 30px 56px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .11em; font-size: .73rem; font-weight: 750; color: #526c63; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.12; max-width: 720px; margin: 12px 0 16px; letter-spacing: -.045em; }
+    .intro { max-width: 700px; line-height: 1.65; color: #52645e; margin: 0 0 28px; }
+    .mode { display: inline-block; border: 1px solid #bed3c7; border-radius: 20px; padding: 7px 12px; font-size: .8rem; background: #e6f0e8; }
+    .mode.before { background: #fff0db; border-color: #dfbd87; }
+    form { background: white; border: 1px solid #d5dfd7; padding: 22px; border-radius: 14px; display: grid; grid-template-columns: 1.5fr 1fr auto; align-items: end; gap: 18px; margin-top: 22px; }
+    label { display: block; font-size: .83rem; font-weight: 700; margin-bottom: 8px; }
+    input, select, button { font: inherit; min-height: 44px; border-radius: 7px; }
+    input, select { width: 100%; border: 1px solid #aabbb1; padding: 10px; background: white; color: #17302c; }
+    button { padding: 10px 22px; background: #164b3e; color: white; border: 1px solid #164b3e; cursor: pointer; }
+    :focus-visible { outline: 3px solid #c67820; outline-offset: 3px; }
+    .summary { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin: 25px 0 15px; }
+    #result-count { font-size: 1rem; font-weight: 750; }
+    .scope-note { font-size: .78rem; color: #52645e; }
+    #products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .product { background: white; border: 1px solid #d5dfd7; border-radius: 12px; padding: 22px; min-height: 150px; }
+    .product[hidden], #empty[hidden] { display: none; }
+    .product h2 { font-size: 1.1rem; margin: 18px 0 9px; letter-spacing: -.02em; }
+    .category { font-size: .75rem; font-weight: 750; color: #526c63; text-transform: uppercase; letter-spacing: .08em; }
+    .code { font-size: .8rem; color: #67776f; }
+    #empty { background: white; border: 1px dashed #aabbb1; border-radius: 12px; padding: 34px; text-align: center; line-height: 1.7; }
+    footer { border-top: 1px solid #d5dfd7; margin-top: 28px; padding-top: 16px; font-size: .78rem; color: #52645e; line-height: 1.6; }
+    @media (max-width: 700px) { main { padding: 28px 18px; } form { grid-template-columns: 1fr; } #products { grid-template-columns: 1fr; } .summary { display: block; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Small interface, observable behavior</div>
+  <h1>Reset the controls.<br>Restore the results.</h1>
+  <p class="intro">A form can reset correctly while the rest of the page stays stale. This self-contained teaching demo keeps the query, category, visible products and result count in sync.</p>
+  <span id="mode" class="mode"></span>
+  <form id="filters" role="search" aria-label="Product filters">
+    <div><label for="query">Search products</label><input id="query" name="query" type="search" placeholder="Try Cobalt" autocomplete="off"></div>
+    <div><label for="category">Category</label><select id="category" name="category"><option value="all">All categories</option><option value="desk">Desk</option><option value="travel">Travel</option></select></div>
+    <button type="reset">Reset filters</button>
+  </form>
+  <div class="summary"><p id="result-count" role="status" aria-live="polite" aria-atomic="true"></p><p class="scope-note">Six invented products · local demo only</p></div>
+  <section id="products" aria-label="Matching products">
+    <article class="product" data-category="desk" data-name="cobalt notebook"><span class="category">Desk</span><h2>Cobalt Notebook</h2><span class="code">DEMO-01</span></article>
+    <article class="product" data-category="travel" data-name="sand canvas pouch"><span class="category">Travel</span><h2>Sand Canvas Pouch</h2><span class="code">DEMO-02</span></article>
+    <article class="product" data-category="travel" data-name="cobalt travel bottle"><span class="category">Travel</span><h2>Cobalt Travel Bottle</h2><span class="code">DEMO-03</span></article>
+    <article class="product" data-category="desk" data-name="coral desk tray"><span class="category">Desk</span><h2>Coral Desk Tray</h2><span class="code">DEMO-04</span></article>
+    <article class="product" data-category="desk" data-name="ink notebook"><span class="category">Desk</span><h2>Ink Notebook</h2><span class="code">DEMO-05</span></article>
+    <article class="product" data-category="travel" data-name="fern travel mug"><span class="category">Travel</span><h2>Fern Travel Mug</h2><span class="code">DEMO-06</span></article>
+  </section>
+  <p id="empty" hidden>No matching products.<br>Change the search or reset the filters to restore the full set.</p>
+  <footer>Personal teaching sample. All names and records are invented. This is not a client project, a production storefront, or a claim of commercial experience. No network calls, customer data, dependencies or tracking.</footer>
+</main>
+<script>
+  const form = document.querySelector('#filters');
+  const query = document.querySelector('#query');
+  const category = document.querySelector('#category');
+  const products = [...document.querySelectorAll('.product')];
+  const resultCount = document.querySelector('#result-count');
+  const empty = document.querySelector('#empty');
+  const before = new URLSearchParams(location.search).get('mode') === 'before';
+  const badge = document.querySelector('#mode');
+  badge.textContent = before ? 'Before: reset does not refresh results' : 'After: controls and results stay in sync';
+  badge.classList.toggle('before', before);
+
+  function renderResults() {
+    const term = query.value.trim().toLowerCase();
+    let matches = 0;
+    for (const product of products) {
+      const nameMatches = product.dataset.name.includes(term);
+      const categoryMatches = category.value === 'all' || category.value === product.dataset.category;
+      product.hidden = !(nameMatches && categoryMatches);
+      if (!product.hidden) matches += 1;
+    }
+    resultCount.textContent = `${matches} of ${products.length} products`;
+    empty.hidden = matches !== 0;
+  }
+
+  form.addEventListener('submit', event => event.preventDefault());
+  form.addEventListener('input', renderResults);
+  form.addEventListener('change', renderResults);
+
+  if (!before) {
+    form.addEventListener('reset', () => {
+      // The reset event is dispatched before the browser resets the controls.
+      // Re-read their values on the next frame, after the default reset action.
+      requestAnimationFrame(renderResults);
+    });
+  }
+
+  renderResults();
+</script>
+</body>
+</html>
