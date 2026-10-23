@@ -1,0 +1,7 @@
+{
+  "theme": "light",
+  "max_retries": 3,
+  "include_archived": false,
+  "support_note": null,
+  "legacy_mode": "off"
+}

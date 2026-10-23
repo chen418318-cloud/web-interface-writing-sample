@@ -1,0 +1,65 @@
+{
+  "policy": "Exact, case-sensitive strings; remove one leading prefix only",
+  "scope": "Read-only synthetic name planning, not filesystem validation",
+  "summary": {
+    "ready": 4,
+    "unchanged": 2,
+    "blocked": 3
+  },
+  "rows": [
+    {
+      "source": "draft-report.txt",
+      "target": "report.txt",
+      "status": "blocked",
+      "reason": "target is an existing source name"
+    },
+    {
+      "source": "report.txt",
+      "target": "report.txt",
+      "status": "unchanged",
+      "reason": "prefix absent at start"
+    },
+    {
+      "source": "draft-plan.csv",
+      "target": "plan.csv",
+      "status": "ready",
+      "reason": "literal target is not occupied"
+    },
+    {
+      "source": "draft-draft-note.txt",
+      "target": "draft-note.txt",
+      "status": "blocked",
+      "reason": "target is an existing source name"
+    },
+    {
+      "source": "draft-note.txt",
+      "target": "note.txt",
+      "status": "ready",
+      "reason": "literal target is not occupied"
+    },
+    {
+      "source": "notes.txt",
+      "target": "notes.txt",
+      "status": "unchanged",
+      "reason": "prefix absent at start"
+    },
+    {
+      "source": "draft-",
+      "target": "",
+      "status": "blocked",
+      "reason": "empty target"
+    },
+    {
+      "source": "draft-茶.txt",
+      "target": "茶.txt",
+      "status": "ready",
+      "reason": "literal target is not occupied"
+    },
+    {
+      "source": "draft-map.csv",
+      "target": "map.csv",
+      "status": "ready",
+      "reason": "literal target is not occupied"
+    }
+  ]
+}

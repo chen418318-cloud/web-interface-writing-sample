@@ -1,0 +1,89 @@
+{
+  "scope": "Read-only, flat JSON scalar review; not application validation",
+  "summary": {
+    "added": 1,
+    "removed": 2,
+    "changed": 2,
+    "unchanged": 1
+  },
+  "rows": [
+    {
+      "key": "include_archived",
+      "status": "changed",
+      "before": {
+        "present": true,
+        "value": false,
+        "kind": "boolean"
+      },
+      "after": {
+        "present": true,
+        "value": 0,
+        "kind": "number"
+      }
+    },
+    {
+      "key": "legacy_mode",
+      "status": "removed",
+      "before": {
+        "present": true,
+        "value": "off",
+        "kind": "string"
+      },
+      "after": {
+        "present": false
+      }
+    },
+    {
+      "key": "max_retries",
+      "status": "unchanged",
+      "before": {
+        "present": true,
+        "value": 3,
+        "kind": "number"
+      },
+      "after": {
+        "present": true,
+        "value": 3.0,
+        "kind": "number"
+      }
+    },
+    {
+      "key": "new_hint",
+      "status": "added",
+      "before": {
+        "present": false
+      },
+      "after": {
+        "present": true,
+        "value": null,
+        "kind": "null"
+      }
+    },
+    {
+      "key": "support_note",
+      "status": "removed",
+      "before": {
+        "present": true,
+        "value": null,
+        "kind": "null"
+      },
+      "after": {
+        "present": false
+      }
+    },
+    {
+      "key": "theme",
+      "status": "changed",
+      "before": {
+        "present": true,
+        "value": "light",
+        "kind": "string"
+      },
+      "after": {
+        "present": true,
+        "value": "dark",
+        "kind": "string"
+      }
+    }
+  ]
+}

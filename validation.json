@@ -1,0 +1,330 @@
+{
+  "executedAt": "2026-10-23T16:00:41.508083+00:00",
+  "runtime": "CPython 3.12.14",
+  "system": "Windows",
+  "scope": "Pure Python offline checks; no rename, restart, browser, client data, or production tests",
+  "syntheticInputs": true,
+  "codexAssistanceDisclosed": true,
+  "cliRuns": [
+    {
+      "command": "python -X utf8 rename_plan.py names.synthetic.json",
+      "exitCode": 0,
+      "summary": {
+        "ready": 4,
+        "unchanged": 2,
+        "blocked": 3
+      }
+    },
+    {
+      "command": "python -X utf8 config_diff.py before.synthetic.json after.synthetic.json",
+      "exitCode": 0,
+      "summary": {
+        "added": 1,
+        "removed": 2,
+        "changed": 2,
+        "unchanged": 1
+      }
+    }
+  ],
+  "summary": {
+    "passed": 30,
+    "failed": 0,
+    "total": 30
+  },
+  "checks": [
+    {
+      "id": "rename-nine-row-buckets",
+      "actual": {
+        "ready": 4,
+        "unchanged": 2,
+        "blocked": 3
+      },
+      "expected": {
+        "ready": 4,
+        "unchanged": 2,
+        "blocked": 3
+      },
+      "passed": true
+    },
+    {
+      "id": "rename-existing-target-blocked",
+      "actual": "blocked",
+      "expected": "blocked",
+      "passed": true
+    },
+    {
+      "id": "rename-moving-target-still-blocked",
+      "actual": "blocked",
+      "expected": "blocked",
+      "passed": true
+    },
+    {
+      "id": "rename-one-prefix-only",
+      "actual": "draft-note.txt",
+      "expected": "draft-note.txt",
+      "passed": true
+    },
+    {
+      "id": "rename-empty-target-blocked",
+      "actual": "empty target",
+      "expected": "empty target",
+      "passed": true
+    },
+    {
+      "id": "rename-unicode-name-retained",
+      "actual": "茶.txt",
+      "expected": "茶.txt",
+      "passed": true
+    },
+    {
+      "id": "rename-input-not-mutated",
+      "actual": [
+        "draft-report.txt",
+        "report.txt",
+        "draft-plan.csv",
+        "draft-draft-note.txt",
+        "draft-note.txt",
+        "notes.txt",
+        "draft-",
+        "draft-茶.txt",
+        "draft-map.csv"
+      ],
+      "expected": [
+        "draft-report.txt",
+        "report.txt",
+        "draft-plan.csv",
+        "draft-draft-note.txt",
+        "draft-note.txt",
+        "notes.txt",
+        "draft-",
+        "draft-茶.txt",
+        "draft-map.csv"
+      ],
+      "passed": true
+    },
+    {
+      "id": "rename-prefix-in-middle-unchanged",
+      "actual": {
+        "ready": 0,
+        "unchanged": 1,
+        "blocked": 0
+      },
+      "expected": {
+        "ready": 0,
+        "unchanged": 1,
+        "blocked": 0
+      },
+      "passed": true
+    },
+    {
+      "id": "rename-ready-targets-unique-and-unoccupied",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "id": "rename-exact-case-policy",
+      "actual": {
+        "ready": 1,
+        "unchanged": 1,
+        "blocked": 0
+      },
+      "expected": {
+        "ready": 1,
+        "unchanged": 1,
+        "blocked": 0
+      },
+      "passed": true
+    },
+    {
+      "id": "rename-duplicate-source-rejected",
+      "actual": "ValueError",
+      "expected": "ValueError",
+      "passed": true
+    },
+    {
+      "id": "rename-nonstring-rejected",
+      "actual": "TypeError",
+      "expected": "TypeError",
+      "passed": true
+    },
+    {
+      "id": "rename-empty-prefix-rejected",
+      "actual": "ValueError",
+      "expected": "ValueError",
+      "passed": true
+    },
+    {
+      "id": "config-six-key-buckets",
+      "actual": {
+        "added": 1,
+        "removed": 2,
+        "changed": 2,
+        "unchanged": 1
+      },
+      "expected": {
+        "added": 1,
+        "removed": 2,
+        "changed": 2,
+        "unchanged": 1
+      },
+      "passed": true
+    },
+    {
+      "id": "config-boolean-number-change-detected",
+      "actual": "changed",
+      "expected": "changed",
+      "passed": true
+    },
+    {
+      "id": "config-same-json-number-unchanged",
+      "actual": "unchanged",
+      "expected": "unchanged",
+      "passed": true
+    },
+    {
+      "id": "config-added-null-is-present",
+      "actual": {
+        "present": true,
+        "value": null,
+        "kind": "null"
+      },
+      "expected": {
+        "present": true,
+        "value": null,
+        "kind": "null"
+      },
+      "passed": true
+    },
+    {
+      "id": "config-removed-null-was-present",
+      "actual": {
+        "present": true,
+        "value": null,
+        "kind": "null"
+      },
+      "expected": {
+        "present": true,
+        "value": null,
+        "kind": "null"
+      },
+      "passed": true
+    },
+    {
+      "id": "config-absent-side-has-no-invented-null",
+      "actual": {
+        "present": false
+      },
+      "expected": {
+        "present": false
+      },
+      "passed": true
+    },
+    {
+      "id": "config-inputs-not-mutated",
+      "actual": "[{\"include_archived\": false, \"legacy_mode\": \"off\", \"max_retries\": 3, \"support_note\": null, \"theme\": \"light\"}, {\"include_archived\": 0, \"max_retries\": 3.0, \"new_hint\": null, \"theme\": \"dark\"}]",
+      "expected": "[{\"include_archived\": false, \"legacy_mode\": \"off\", \"max_retries\": 3, \"support_note\": null, \"theme\": \"light\"}, {\"include_archived\": 0, \"max_retries\": 3.0, \"new_hint\": null, \"theme\": \"dark\"}]",
+      "passed": true
+    },
+    {
+      "id": "config-stable-key-order",
+      "actual": [
+        "include_archived",
+        "legacy_mode",
+        "max_retries",
+        "new_hint",
+        "support_note",
+        "theme"
+      ],
+      "expected": [
+        "include_archived",
+        "legacy_mode",
+        "max_retries",
+        "new_hint",
+        "support_note",
+        "theme"
+      ],
+      "passed": true
+    },
+    {
+      "id": "config-nested-object-rejected",
+      "actual": "TypeError",
+      "expected": "TypeError",
+      "passed": true
+    },
+    {
+      "id": "config-array-rejected",
+      "actual": "TypeError",
+      "expected": "TypeError",
+      "passed": true
+    },
+    {
+      "id": "config-nonfinite-number-rejected",
+      "actual": "ValueError",
+      "expected": "ValueError",
+      "passed": true
+    },
+    {
+      "id": "config-original-equality-trap-reproduced",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "id": "rename-cli-exit",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "id": "rename-cli-summary",
+      "actual": {
+        "ready": 4,
+        "unchanged": 2,
+        "blocked": 3
+      },
+      "expected": {
+        "ready": 4,
+        "unchanged": 2,
+        "blocked": 3
+      },
+      "passed": true
+    },
+    {
+      "id": "config-cli-exit",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "id": "config-cli-summary",
+      "actual": {
+        "added": 1,
+        "removed": 2,
+        "changed": 2,
+        "unchanged": 1
+      },
+      "expected": {
+        "added": 1,
+        "removed": 2,
+        "changed": 2,
+        "unchanged": 1
+      },
+      "passed": true
+    },
+    {
+      "id": "cli-input-file-hashes-unchanged",
+      "actual": {
+        "names.synthetic.json": "c705257dfbac320e3c9db9d6a59b444622f0b1bb507e8065973c2bb10721362d",
+        "before.synthetic.json": "5771a9e33c35cd45b540c375d81e7bb216692a075cee3d2fed876b6757db1508",
+        "after.synthetic.json": "aec9370784979fd072a69d3d705cde0264e7d521acca8df24e12f5f705927c61"
+      },
+      "expected": {
+        "names.synthetic.json": "c705257dfbac320e3c9db9d6a59b444622f0b1bb507e8065973c2bb10721362d",
+        "before.synthetic.json": "5771a9e33c35cd45b540c375d81e7bb216692a075cee3d2fed876b6757db1508",
+        "after.synthetic.json": "aec9370784979fd072a69d3d705cde0264e7d521acca8df24e12f5f705927c61"
+      },
+      "passed": true
+    }
+  ]
+}
